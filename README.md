@@ -19,14 +19,14 @@ squashfs.ubi
 Copy the files (squashfs.ubi, bcm4708-edgecore-ecw7220-l.dtb, uImage) to TFTP server root directory and boot AP to u-boot shell.
 **In order to boot AP to u-boot you need to connect to serial terminal of AP. After device is powered on you must see the line that asks you if you want to contiune with normal boot or U-Boot. Interrupt the booting progress by sending any letter over serial.**
 
-Then issue following commands in u-boot shell (do not type 'u-boot> ' part, replace 192.168.1.121 to IP-address of your TFTP server):
+Then issue following commands in u-boot shell (do not type 'u-boot> ' part, replace 192.168.1.50 to IP-address of your TFTP server):
 
 ```
-u-boot> tftpboot 0x82000000 192.168.1.121:squashfs.ubi
+u-boot> tftpboot 0x82000000 192.168.1.50:squashfs.ubi
 u-boot> nand erase 0x01080000 0x06F80000
 u-boot> nand write 0x82000000 0x01080000 0x06F80000
-u-boot> tftpboot 0x80000000 192.168.1.121:bcm4708-edgecore-ecw7220-l.dtb
-u-boot> tftpboot 0x82007FC0 192.168.1.121:uImage
+u-boot> tftpboot 0x80000000 192.168.1.50:bcm4708-edgecore-ecw7220-l.dtb
+u-boot> tftpboot 0x82007FC0 192.168.1.50:uImage
 u-boot> bootm 0x82007FC0
 ```
 
