@@ -13,9 +13,12 @@ squashfs.ubi
 'linux-stable' folder is the linux kernel fork used for building. 
 
 #Flashing OpenWRT rootfs+ubifs partitions to AP
+
 **In order to flash files to AP we need to deploy a TFTP server in our computer. Afterwards AP will fetch required files from that server so its mandatory. There are free TFTP server applications for both Windows and Linux. After deploying TFTP server, set a root directory.**
+
 Copy the files (squashfs.ubi, bcm4708-edgecore-ecw7220-l.dtb, uImage) to TFTP server root directory and boot AP to u-boot shell.
 **In order to boot AP to u-boot you need to connect to serial terminal of AP. After device is powered on you must see the line that asks you if you want to contiune with normal boot or U-Boot. Interrupt the booting progress by sending any letter over serial.**
+
 Then issue following commands in u-boot shell (do not type 'u-boot> ' part, replace 192.168.1.121 to IP-address of your TFTP server):
 
 ```
