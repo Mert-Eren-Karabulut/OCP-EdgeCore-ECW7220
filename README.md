@@ -1,35 +1,21 @@
-# Build Linux kernel
+# Building in linux
 ```
 docker build -t ocp .
 docker run -v `pwd`/opt:/opt -it ocp
 ```
 
-folder './opt' should contain compiled binary files:
+folder './opt' should contain compiled files:
 ```
 bcm4708-edgecore-ecw7220-l.dtb
 uImage
 squashfs.ubi
 ```
+'linux-stable' folder is the linux kernel fork used for building. 
 
-folder 'linux-stable' is a full Linux kernel tree used for compilation.
-
-#building under OSx
-
-default Mac filesystem is case-insensitive and not compatible with OpenWRT build system.
-So, we need to make case-sensitive volume and build inside this volume. Here is a commands
-to do this:
-
-```
-docker build -t ocp .
-hdiutil create -size 20g -fs "Case-sensitive HFS+" -volname OpenWrt OpenWrt.dmg
-hdiutil attach OpenWrt.dmg
-cd /Volumes/OpenWrt
-docker run -v `pwd`/opt:/opt -it ocp
-```
-
-#Flashing OpenWRT rootfs+ubifs to AP
-
-Copy binary files (squashfs.ubi, bcm4708-edgecore-ecw7220-l.dtb, uImage) to TFTP server directory and boot AP to u-boot shell.
+#Flashing OpenWRT rootfs+ubifs partitions to AP
+**In order to flash files to AP we need to deploy a TFTP server in our computer. Afterwards AP will fetch required files from that server so its mandatory. There are free TFTP server applications for both Windows and Linux. After deploying TFTP server, set a root directory.**
+Copy the files (squashfs.ubi, bcm4708-edgecore-ecw7220-l.dtb, uImage) to TFTP server root directory and boot AP to u-boot shell.
+**In order to boot AP to u-boot you need to connect to serial terminal of AP. After device is powered on you must see the line that asks you if you want to contiune with normal boot or U-Boot. Interrupt the booting progress by sending any letter over serial.**
 Then issue following commands in u-boot shell (do not type 'u-boot> ' part, replace 192.168.1.121 to IP-address of your TFTP server):
 
 ```
@@ -41,7 +27,7 @@ u-boot> tftpboot 0x82007FC0 192.168.1.121:uImage
 u-boot> bootm 0x82007FC0
 ```
 
-here is a console output if everything is ok:
+console output must look like this if everything is ok:
 ```
 [    0.000000] Linux version 4.9.5-g7954d9c (root@009042690e3e) (gcc version 5.4.0 20160609 (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.4) ) #1 SMP Wed Feb 1 07
 ...
@@ -79,3 +65,5 @@ DESIGNATED DRIVER (Bleeding Edge, 12009)
 -----------------------------------------------------
 root@OpenWrt:/#
 ```
+
+**I have also provided compiled files in the folder *_Compiled_*. Since building Arm64 kernel can take long you can use already compiled files. Take the files and continue from the U-boot sequences above.**
