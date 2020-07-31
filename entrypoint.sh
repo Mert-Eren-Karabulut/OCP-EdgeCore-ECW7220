@@ -20,11 +20,13 @@ PATH=$PATH:./staging_dir/host/bin/ ./scripts/ubinize-image.sh ./build_dir/target
 
 cd /opt
 # Build Linux kernel
-if [ ! -d "linux-stable" ]; then
-    git clone --depth=1 -b ocp-linux-4.9.y https://github.com/aospan/linux-stable.git
+if [ ! -d "linux" ]; then
+    #git clone --depth=1 -b ocp-linux-4.9.y https://github.com/aospan/linux-stable.git #deprecathed
+    git clone --depth=1 -b linux-4.9.y https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
 fi
-
-cd linux-stable 
+cd linux/arch/arm/configs
+wget https://github.com/Mert-Eren-Karabulut/linux-kernel-bcm4708-edgecore-ecw7220-l/blob/master/arch/arm/configs/ecw7220l_defconfig
+cd /opt/linux
 
 if [ ! -f ".config" ]; then
 	make -j"$(nproc)" LOADADDR=0x82008000 ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- ecw7220l_defconfig
