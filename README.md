@@ -1,5 +1,10 @@
 #**Important Note**
-In order to crosscompile required linux kernel, ```*ECW7220l_defconfig*``` file is mandatory. This file isn't coming by default with any linux kernel build mainly because its custom written for this device. So I will provide this file seperately so you can crosscompile required files with any linux kernel. Since the device is built on arm architecture this file must be found on ```/arch/arm/configs``` directory in linux kernel. Docker container automatically runs ```endpoint.sh``` file thus commands are in this file. Provided linux kernel is fairly old but works great without any problems. You can try to compile with newer kernel but you may need to make changes on ```*ECW7220l_defconfig*``` file to do so.
+
+In order to crosscompile required linux kernel, ```*ECW7220l_defconfig*``` file is mandatory. This file isn't coming by default with any linux kernel build mainly because its custom written for this device. So I will provide this file seperately so you can crosscompile required files with any linux kernel. Since the device is built on arm architecture this file must be found on ```/arch/arm/configs``` directory in linux kernel.
+
+Docker container automatically runs ```endpoint.sh``` file thus commands are in this file. Provided linux kernel is fairly old but works great without any problems. You can try to compile with newer kernel but you may need to make changes on ```*ECW7220l_defconfig*``` file to do so. Current and provided ```endpoint.sh``` can fetch the custom linux kernel which includes ```*ECW7220l_defconfig*``` file by default. 
+
+
 
 If the given link for linux kernel in endpoint.sh is discontiuned or not available you can find another repo and replace the link in ```endpoint.sh``` before running the commands. **Don't forget to place ```*ECW7220l_defconfig*``` file to required directory before starting the crosscompile proccess.***
 
@@ -19,7 +24,7 @@ bcm4708-edgecore-ecw7220-l.dtb
 uImage
 squashfs.ubi
 ```
-'linux-stable' folder is the linux kernel fork used for building. 
+'linux' folder is the linux kernel fork used for building. 
 
 #Flashing OpenWRT rootfs+ubifs partitions to AP
 
