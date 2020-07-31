@@ -2,9 +2,7 @@
 
 In order to crosscompile required linux kernel, ```*ECW7220l_defconfig*``` file is mandatory. This file isn't coming by default with any linux kernel build mainly because its custom written for this device. So I will provide this file seperately so you can crosscompile required files with any linux kernel. Since the device is built on arm architecture this file must be found on ```/arch/arm/configs``` directory in linux kernel.
 
-Docker container automatically runs ```endpoint.sh``` file thus commands are in this file. Provided linux kernel is fairly old but works great without any problems. You can try to compile with newer kernel but you may need to make changes on ```*ECW7220l_defconfig*``` file to do so. Current and provided ```endpoint.sh``` can fetch the custom linux kernel which includes ```*ECW7220l_defconfig*``` file by default. 
-
-
+Docker container automatically runs ```endpoint.sh``` file thus commands are in this file. Provided linux kernel is fairly old but works great without any problems. You can try to compile with newer kernel but you may need to make changes on ```*ECW7220l_defconfig*``` file to do so. Current and provided ```endpoint.sh``` will download vanilla linux kernel and then copy ```*ECW7220l_defconfig*``` file to its required directory by default. 
 
 If the given link for linux kernel in endpoint.sh is discontiuned or not available you can find another repo and replace the link in ```endpoint.sh``` before running the commands. **Don't forget to place ```*ECW7220l_defconfig*``` file to required directory before starting the crosscompile proccess.***
 
@@ -13,6 +11,9 @@ Since docker doesn't completely support Ubuntu WSL, compiling under Ubuntu WSL i
 
 
 # Building in linux
+
+Along the building and compiling proccess shell may can ask you for some dependencies. Docker container includes all the dependencies required by the time that this guide is written but in future change in some  dependency names can result conflicts. If this is the case for you try to manually install all the dependencies along the building proccess.
+
 ```
 docker build -t ocp .
 docker run -v `pwd`/opt:/opt -it ocp
