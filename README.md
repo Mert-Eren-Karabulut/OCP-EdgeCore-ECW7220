@@ -7,6 +7,7 @@ Docker container automatically runs ```endpoint.sh``` file thus commands are in 
 If the given link for linux kernel in endpoint.sh is discontiuned or not available you can find another repo and replace the link in ```endpoint.sh``` before running the commands. **Don't forget to place ```*ECW7220l_defconfig*``` file to required directory before starting the crosscompile proccess.***
 
 #**Compiling in Ubuntu shell for Windows (Ubuntu WSL)**
+
 Since docker doesn't completely support Ubuntu WSL, compiling under Ubuntu WSL is not possible without some tricks. It's not impossible but you need to deal with every error you encountered and find the required patchs. I tried to run commands in Ubuntu WSL version 1 but there were so many errors so I gave up on that. Issues may have been resolved since the version 2 of Ubuntu WSL.
 
 
