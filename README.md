@@ -85,4 +85,4 @@ DESIGNATED DRIVER (Bleeding Edge, 12009)
 root@OpenWrt:/#
 ```
 
-**I have also provided compiled files in the folder *_Compiled_*. Since building Arm64 kernel can take long you can use already compiled files. Take the files and continue from the U-boot sequences above.**
+**I have also provided compiled files in the folder *_Compiled_*. Since building Arm kernel can take long you can use already compiled files. Take the files and continue from the U-boot sequences above.**
